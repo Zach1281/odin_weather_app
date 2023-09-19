@@ -17,8 +17,39 @@ function createEventListeners() {
         { mode: "cors" }
       );
       const data = await response.json();
+      createCurrentWeather(data);
     }
   });
+}
+
+function createCurrentWeather(data) {
+  // query statically typed html elements
+  const location = document.querySelector(".location");
+  const icon = document.querySelector(".icon");
+  const currentTemp = document.querySelector(".current-temp");
+  const maxTemp = document.querySelector(".max-temp");
+  const minTemp = document.querySelector(".min-temp");
+
+  // create dyncmic html elements
+  const iconImg = document.createElement("img");
+
+  // remove anything from elements if there was any
+  location.textContent = "";
+  if (icon.hasChildNodes()) {
+    icon.firstChild.remove();
+  }
+  currentTemp.textContent = "";
+  maxTemp.textContent = "";
+  minTemp.textContent = "";
+
+  // append elements with weather api info provided user has input a valid location
+  location.textContent = data.location.name + ", " + data.location.region;
+  iconImg.src = data.current.condition.icon;
+  icon.appendChild(iconImg);
+  currentTemp.textContent = data.current.temp_f + "°";
+  //   console.log(data.forecast.forecastday);
+  maxTemp.textContent = data.forecast.forecastday[0].day.maxtemp_f + "°";
+  minTemp.textContent = data.forecast.forecastday[0].day.mintemp_f + "°";
 }
 
 websiteInit();

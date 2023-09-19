@@ -17,7 +17,26 @@ main {
   justify-content: flex-end;
   align-items: center;
   height: 50vh;
+  gap: 1rem;
 }
 
 .current-weather {
+  color: white;
+}
+
+.icon-current-temp-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.min-max-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-location {
+  color: white;
 }
